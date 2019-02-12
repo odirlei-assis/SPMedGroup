@@ -19,4 +19,27 @@ drop procedure Medicos_Especialidade
 
 exec Medicos_Especialidade 'Psiquiatria';
 
-SELECT FLOOR(DATEDIFF(DAY, data_nascimento, GETDATE()) / 365.25) from prontuario
+SELECT FLOOR(DATEDIFF(DAY, data_nascimento, GETDATE()) / 365.25) as Idade from prontuario
+
+create clustered index index_prontuario_rg
+	on prontuario (rg);
+
+select * from PRONTUARIO
+
+create trigger quantidade_usuarios
+	on usuarios after insert
+	as begin
+	select count (*) from USUARIOS
+	end
+
+create procedure Inserir_Usuarios
+	@EMAIL varchar(250)
+   ,@SENHA varchar(250)
+   ,@ID_TIPO_USUARIO varchar(100)
+as
+begin
+	insert into USUARIOS(EMAIL, SENHA, ID_TIPO)
+	values (@EMAIL, @SENHA, @ID_TIPO_USUARIO)
+end
+
+exec Inserir_Usuarios 'O@O.O', '123456','1'
