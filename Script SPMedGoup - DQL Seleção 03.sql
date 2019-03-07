@@ -43,3 +43,16 @@ begin
 end
 
 exec Inserir_Usuarios 'O@O.O', '123456','1'
+
+select
+MEDICOS.*, CONSULTAS.*
+from
+MEDICOS inner join CONSULTAS
+on MEDICOS.ID = CONSULTAS.ID_MEDICO
+
+select
+PRONTUARIO.*, CONSULTAS.*
+from
+PRONTUARIO inner join CONSULTAS
+on
+PRONTUARIO.ID = CONSULTAS.ID_PRONTUARIO
