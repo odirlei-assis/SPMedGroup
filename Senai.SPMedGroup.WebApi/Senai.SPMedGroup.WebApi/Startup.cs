@@ -56,6 +56,8 @@ namespace Senai.SPMedGroup.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
+
             app.UseMvc();
         }
     }

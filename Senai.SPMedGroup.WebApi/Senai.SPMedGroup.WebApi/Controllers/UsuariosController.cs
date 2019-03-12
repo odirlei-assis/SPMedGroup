@@ -24,6 +24,7 @@ namespace Senai.SPMedGroup.WebApi.Controllers
             UsuarioRepository = new UsuarioRepository();
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPut]
         public IActionResult Alterar(Usuarios usuario)
         {
@@ -53,6 +54,7 @@ namespace Senai.SPMedGroup.WebApi.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpDelete]
         public IActionResult Deletar(Usuarios usuario)
         {
@@ -67,6 +69,7 @@ namespace Senai.SPMedGroup.WebApi.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpGet]
         public IActionResult Listar()
         {
