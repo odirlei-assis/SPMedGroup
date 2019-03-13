@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -39,28 +41,30 @@ namespace Senai.SPMedGroup.WebApi.Controllers
             }
         }
 
-        [Authorize(Roles = "Administrador")]
-        [HttpDelete]
-        public IActionResult DeletarConsulta(Consultas consulta)
-        {
-            try
-            {
-                ConsultaRepository.DeletarConsulta(consulta);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { mensagem = "Erro!" + ex.Message });
-            }
-        }
-
-        [Authorize(Roles = "Administrador")]
+        [Authorize]
         [HttpGet]
         public IActionResult ListarConsultas()
         {
             try
             {
-                return Ok(ConsultaRepository.ListarConsultas());
+                int id = Convert.ToInt32(HttpContext.User.Claims.First(x => x.Type == JwtRegisteredClaimNames.Jti).Value);
+
+                string role = HttpContext.User.Claims.First(x => x.Type == ClaimTypes.Role).Value;
+
+                if (role == "Administrador")
+                {
+                    ConsultaRepository.ListarConsultas();
+                }
+                else if (role == "Médico")
+                {
+                    ConsultaRepository.ListarConsultasMedico(id);
+                }
+                else
+                {
+                    ConsultaRepository.ListarConsultasPaciente(id);
+                }
+
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -87,5 +91,47 @@ namespace Senai.SPMedGroup.WebApi.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador")]
+        [HttpPut("AlterarSituacao")]
+        public IActionResult AlterarSituacao(Consultas consulta)
+        {
+            try
+            {
+                Consultas consultaAlterada = ConsultaRepository.BuscarConsultaPorId(consulta.Id);
+
+                consultaAlterada.IdSituacao = consulta.IdSituacao;
+                ConsultaRepository.Alterar(consultaAlterada);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensagem = "Error" + ex.Message});
+            }
+        }
+
+        [Authorize(Roles = "Médico")]
+        [HttpPut("AlterarObservacao")]
+        public IActionResult AlterarObservacao(Consultas consulta)
+        {
+            try
+            {
+                Consultas consultaAlterada = ConsultaRepository.BuscarConsultaPorId(consulta.Id);
+
+                if (consultaAlterada.Observacoes == null)
+                {
+                    return BadRequest("Insira a Observação");
+                }
+
+                consultaAlterada.Observacoes = consulta.Observacoes;
+                ConsultaRepository.Alterar(consultaAlterada);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensagem = "Error" + ex.Message });
+            }
+        }
     }
 }

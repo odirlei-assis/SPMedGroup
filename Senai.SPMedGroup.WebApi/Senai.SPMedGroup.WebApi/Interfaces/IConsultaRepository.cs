@@ -10,10 +10,14 @@ namespace Senai.SPMedGroup.WebApi.Interfaces
     {
         void CadastrarConsulta(Consultas consulta);
 
-        void DeletarConsulta(Consultas consulta);
-
         List<Consultas> ListarConsultas();
 
         Consultas BuscarConsultaPorId(int id);
+
+        void Alterar(Consultas consulta);
+
+        List<Consultas> ListarConsultasPaciente(int id);
+
+        List<Consultas> ListarConsultasMedico(int id);
     }
 }
