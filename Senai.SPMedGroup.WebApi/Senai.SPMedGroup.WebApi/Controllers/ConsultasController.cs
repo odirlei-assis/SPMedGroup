@@ -53,18 +53,16 @@ namespace Senai.SPMedGroup.WebApi.Controllers
 
                 if (role == "Administrador")
                 {
-                    ConsultaRepository.ListarConsultas();
+                    return Ok(ConsultaRepository.ListarConsultas());
                 }
                 else if (role == "Médico")
                 {
-                    ConsultaRepository.ListarConsultasMedico(id);
+                    return Ok(ConsultaRepository.ListarConsultasMedico(id));
                 }
                 else
                 {
-                    ConsultaRepository.ListarConsultasPaciente(id);
+                    return Ok(ConsultaRepository.ListarConsultasPaciente(id));
                 }
-
-                return Ok();
             }
             catch (Exception ex)
             {

@@ -8,6 +8,7 @@ namespace Senai.SPMedGroup.WebApi.Domains
         public Usuarios()
         {
             Medicos = new HashSet<Medicos>();
+            Prontuario = new HashSet<Prontuario>();
         }
 
         public int Id { get; set; }
@@ -17,5 +18,6 @@ namespace Senai.SPMedGroup.WebApi.Domains
 
         public TipoDeUsuario IdTipoNavigation { get; set; }
         public ICollection<Medicos> Medicos { get; set; }
+        public ICollection<Prontuario> Prontuario { get; set; }
     }
 }

@@ -19,17 +19,15 @@ namespace Senai.SPMedGroup.WebApi.Domains
         public virtual DbSet<Consultas> Consultas { get; set; }
         public virtual DbSet<Especialidades> Especialidades { get; set; }
         public virtual DbSet<Medicos> Medicos { get; set; }
+        public virtual DbSet<Prontuario> Prontuario { get; set; }
         public virtual DbSet<SituacaoDaConsulta> SituacaoDaConsulta { get; set; }
         public virtual DbSet<TipoDeUsuario> TipoDeUsuario { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
-
-        // Unable to generate entity type for table 'dbo.PRONTUARIO'. Please see the warning messages.
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=.\\SqlExpress; Initial Catalog= SENAI_SPMEDGROUP_TARDE; user id=sa; password=132");
             }
         }
@@ -98,6 +96,12 @@ namespace Senai.SPMedGroup.WebApi.Domains
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__CONSULTAS__ID_ME__6477ECF3");
 
+                entity.HasOne(d => d.IdProntuarioNavigation)
+                    .WithMany(p => p.Consultas)
+                    .HasForeignKey(d => d.IdProntuario)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CONSULTAS_ID_PRO");
+
                 entity.HasOne(d => d.IdSituacaoNavigation)
                     .WithMany(p => p.Consultas)
                     .HasForeignKey(d => d.IdSituacao)
@@ -165,6 +169,69 @@ namespace Senai.SPMedGroup.WebApi.Domains
                     .HasConstraintName("FK__MEDICOS__ID_USUA__5EBF139D");
             });
 
+            modelBuilder.Entity<Prontuario>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                    .ForSqlServerIsClustered(false);
+
+                entity.ToTable("PRONTUARIO");
+
+                entity.HasIndex(e => e.Cpf)
+                    .HasName("UQ__PRONTUAR__C1F89731F713F0CA")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Id)
+                    .ForSqlServerIsClustered();
+
+                entity.HasIndex(e => e.Rg)
+                    .HasName("UQ__PRONTUAR__321537C87AC5FDE5")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Cpf)
+                    .IsRequired()
+                    .HasColumnName("CPF")
+                    .HasMaxLength(11)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DataNascimento)
+                    .HasColumnName("DATA_NASCIMENTO")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Endereco)
+                    .IsRequired()
+                    .HasColumnName("ENDERECO")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IdUsuario).HasColumnName("ID_USUARIO");
+
+                entity.Property(e => e.Nome)
+                    .IsRequired()
+                    .HasColumnName("NOME")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Rg)
+                    .IsRequired()
+                    .HasColumnName("RG")
+                    .HasMaxLength(9)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Telefone)
+                    .IsRequired()
+                    .HasColumnName("TELEFONE")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithMany(p => p.Prontuario)
+                    .HasForeignKey(d => d.IdUsuario)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__PRONTUARI__ID_US__5AEE82B9");
+            });
+
             modelBuilder.Entity<SituacaoDaConsulta>(entity =>
             {
                 entity.ToTable("SITUACAO_DA_CONSULTA");
@@ -227,7 +294,7 @@ namespace Senai.SPMedGroup.WebApi.Domains
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.IdTipo)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__USUARIOS__ID_TIP__5629CD9C");
+                    .HasConstraintName("FK_USUARIOS_ID_TI");
             });
         }
     }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Senai.SPMedGroup.WebApi
 {
@@ -22,6 +23,11 @@ namespace Senai.SPMedGroup.WebApi
                     options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
                 })
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "SPMedGroup", Version = "v1" });
+            });
 
             services.AddAuthentication(options =>
             {
@@ -57,6 +63,13 @@ namespace Senai.SPMedGroup.WebApi
             }
 
             app.UseAuthentication();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SPMedGroup API");
+            });
 
             app.UseMvc();
         }

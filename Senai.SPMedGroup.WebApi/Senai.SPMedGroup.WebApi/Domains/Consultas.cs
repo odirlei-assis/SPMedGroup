@@ -13,6 +13,7 @@ namespace Senai.SPMedGroup.WebApi.Domains
         public string Observacoes { get; set; }
 
         public Medicos IdMedicoNavigation { get; set; }
+        public Prontuario IdProntuarioNavigation { get; set; }
         public SituacaoDaConsulta IdSituacaoNavigation { get; set; }
     }
 }
