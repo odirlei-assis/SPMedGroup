@@ -1,4 +1,5 @@
-﻿using Senai.SPMedGroup.WebApi.Domains;
+﻿using Microsoft.EntityFrameworkCore;
+using Senai.SPMedGroup.WebApi.Domains;
 using Senai.SPMedGroup.WebApi.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,8 @@ namespace Senai.SPMedGroup.WebApi.Repositories
         {
             using (SPMedGroupContext ctx = new SPMedGroupContext())
             {
-                Consultas consultaProcurada = ctx.Consultas.Find(id);
+                // Consultas consultaProcurada = ctx.Consultas.Find(id);
+                Consultas consultaProcurada = ctx.Consultas.Include(x => x.IdMedicoNavigation).FirstOrDefault(x => x.Id == id);
 
                 if (consultaProcurada == null)
                 {
