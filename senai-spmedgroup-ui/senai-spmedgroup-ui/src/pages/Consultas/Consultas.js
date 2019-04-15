@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
 class Consultas extends Component {
@@ -16,10 +16,23 @@ class Consultas extends Component {
         };
     }
 
+    logout(event) {
+        event.preventDefault();
+
+        localStorage.removeItem("usuario-spmedgroup");
+        this.props.history.push("/login");
+    }
+
     buscarConsultas() {
-        axios.get('http://localhost:5000/api/consultas')
+        axios.get('http://localhost:5000/api/consultas', {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("usuario-spmedgroup"),
+                "Content-Type": "Application/json"
+            }
+        })
             .then(res => {
                 const consultas = res.data;
+                console.log(consultas);
                 this.setState({ listaconsultas: consultas })
             })
     }
@@ -65,6 +78,16 @@ class Consultas extends Component {
         };
 
         console.log(consulta);
+
+        axios.post('http://localhost:5000/api/consultas', consulta, {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("usuario-spmedgroup"),
+                "Content-Type": "Application/json"
+            }
+        })
+            .then(res => {
+                this.buscarConsultas()
+            })
     }
 
     render() {
@@ -74,13 +97,17 @@ class Consultas extends Component {
                     <div className="container">
                         <img src="" />
 
-                        <nav className="cabecalhoPrincipal-nav">Administrador</nav>
+                        <a onClick={this.logout.bind(this)}
+                            style={{ cursor: "pointer" }}
+                            className="">Sair</a>
+
+                        <nav className="cabecalhoPrincipal-nav">Consultas</nav>
                     </div>
                 </header>
 
                 <main className="conteudoPrincipal">
                     <section className="conteudoPrincipal-cadastro">
-                        <h1 className="conteudoPrincipal-cadastro-titulo">Eventos</h1>
+                        <h1 className="conteudoPrincipal-cadastro-titulo">Consultas</h1>
                         <div className="container" id="conteudoPrincipal-lista">
                             <table id="tabela-lista">
                                 <thead>
@@ -100,16 +127,17 @@ class Consultas extends Component {
                                             return (
                                                 <tr key={consultas.id}>
                                                     <td>{consultas.id}</td>
-                                                    <td>{consultas.idprontuario}</td>
-                                                    <td>{consultas.idmedico}</td>
-                                                    <td>{consultas.dataconsulta}</td>
-                                                    <td>{consultas.idsituacao}</td>
+                                                    <td>{consultas.idProntuario}</td>
+                                                    <td>{consultas.idMedico}</td>
+                                                    <td>{consultas.dataConsulta}</td>
+                                                    <td>{consultas.idSituacao}</td>
                                                     <td>{consultas.observacoes}</td>
                                                 </tr>
                                             );
                                         })
                                     }
-                                </tbody>                            </table>
+                                </tbody>
+                            </table>
                         </div>
 
                         <div className="container" id="conteudoPrincipal-cadastro">
@@ -169,7 +197,7 @@ class Consultas extends Component {
                                         cols="50"
                                         value={this.state.observacoes}
                                         onChange={this.atualizaEstadoObservacoes.bind(this)}
-                                        placeholder="Obsservações"
+                                        placeholder="Observações"
                                         id="consulta_observacoes"
                                     />
                                 </div>
