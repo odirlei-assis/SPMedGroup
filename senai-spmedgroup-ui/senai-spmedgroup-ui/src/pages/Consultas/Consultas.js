@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Cabecalho from '../../components/Cabecalho/Cabecalho';
+import apiService from '../../services/apiService';
 
 class Consultas extends Component {
 
@@ -12,32 +14,41 @@ class Consultas extends Component {
             idmedico: null,
             dataconsulta: "",
             idsituacao: null,
-            observacoes: ""
+            observacoes: "",
+            listamedicos: []
         };
     }
 
-    logout(event) {
-        event.preventDefault();
-
-        localStorage.removeItem("usuario-spmedgroup");
-        this.props.history.push("/login");
-    }
-
     buscarConsultas() {
-        axios.get('http://localhost:5000/api/consultas', {
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("usuario-spmedgroup"),
-                "Content-Type": "Application/json"
-            }
-        })
-            .then(res => {
-                const consultas = res.data;
-                console.log(consultas);
-                this.setState({ listaconsultas: consultas })
-            })
+        // axios.get('http://localhost:5000/api/consultas', {
+        //     headers: {
+        //         "Authorization": "Bearer " + localStorage.getItem("usuario-spmedgroup"),
+        //         "Content-Type": "Application/json"
+        //     }
+        // })
+        //     .then(res => {
+        //         const consultas = res.data;
+        //         console.log(consultas);
+        //         this.setState({ listaconsultas: consultas })
+        //     })
+        apiService
+            .call("consultas")
+            .getAll()
+            .then(data => {
+                console.log(data.data);
+                this.setState({ listaconsultas: data.data });
+        });
     }
 
     componentDidMount() {
+        apiService
+            .call("medicos")
+            .getAll()
+            .then(data => {
+                console.log(data.data);
+                this.setState({ listamedicos: data.data });
+            });
+
         this.buscarConsultas();
     }
 
@@ -73,16 +84,17 @@ class Consultas extends Component {
             idprontuario: this.state.idprontuario,
             idmedico: this.state.idmedico,
             dataconsulta: this.state.dataconsulta,
-            idsituacao: this.state.idsituacao,
+            idsituacao: 2,
             observacoes: this.state.observacoes
         };
 
+        console.log("Consulta:");
         console.log(consulta);
 
         axios.post('http://localhost:5000/api/consultas', consulta, {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("usuario-spmedgroup"),
-                "Content-Type": "Application/json"
+                "Content-Type": "application/json"
             }
         })
             .then(res => {
@@ -93,14 +105,10 @@ class Consultas extends Component {
     render() {
         return (
             <div>
-                <header className="cabecalhoPrincipal">
+                <Cabecalho />
+                <header className="cabecalho">
                     <div className="container">
                         <img src="" />
-
-                        <a onClick={this.logout.bind(this)}
-                            style={{ cursor: "pointer" }}
-                            className="">Sair</a>
-
                         <nav className="cabecalhoPrincipal-nav">Consultas</nav>
                     </div>
                 </header>
@@ -114,9 +122,11 @@ class Consultas extends Component {
                                     <tr>
                                         <th>Id</th>
                                         <th>Id Prontuario</th>
-                                        <th>Id Médico</th>
+                                        {/* <th>Id Médico</th> */}
+                                        <th>Nome Médico</th>
                                         <th>Data da Consulta</th>
-                                        <th>Id Situação da Consulta</th>
+                                        {/* <th>Id Situação da Consulta</th> */}
+                                        <th>Situação da Consulta</th>
                                         <th>Observações</th>
                                     </tr>
                                 </thead>
@@ -128,9 +138,11 @@ class Consultas extends Component {
                                                 <tr key={consultas.id}>
                                                     <td>{consultas.id}</td>
                                                     <td>{consultas.idProntuario}</td>
-                                                    <td>{consultas.idMedico}</td>
+                                                    {/* <td>{consultas.idMedico}</td> */}
+                                                    <td>{consultas.idMedicoNavigation.nome}</td>
                                                     <td>{consultas.dataConsulta}</td>
-                                                    <td>{consultas.idSituacao}</td>
+                                                    {/* <td>{consultas.idSituacao}</td> */}
+                                                    <td>{consultas.idSituacaoNavigation.nome}</td>
                                                     <td>{consultas.observacoes}</td>
                                                 </tr>
                                             );
@@ -151,26 +163,19 @@ class Consultas extends Component {
                                         id="consulta_idProntuario"
                                         placeholder="Id do Prontuario"
                                     />
-                                    <input
+                                    {/* <input
                                         type="text"
                                         value={this.state.idmedico}
                                         onChange={this.atualizaEstadoIdMedico.bind(this)}
                                         id="consulta_idMedico"
                                         placeholder="Id do Médico"
-                                    />
+                                    /> */}
                                     <input
-                                        type="text"
+                                        type= "dateTime"
                                         value={this.state.dataconsulta}
                                         onChange={this.atualizaEstadoData.bind(this)}
                                         id="consulta_data"
                                         placeholder="Data Da Consulta"
-                                    />
-                                    <input
-                                        type="text"
-                                        value={this.state.idsituacao}
-                                        onChange={this.atualizaEstadoIdSituacao.bind(this)}
-                                        id="consulta_idSituacao"
-                                        placeholder="Id da Situação da consulta"
                                     />
                                     {/* <select
                                         id="option__acessolivre"
@@ -180,18 +185,18 @@ class Consultas extends Component {
                                         <option value="1">Livre</option>
                                         <option value="0">Restrito</option>
                                     </select> */}
-                                    {/* <select
-                                        id="option__tipoevento"
-                                        value={this.state.tipoEventoId}
-                                        onChange={this.atualizaEstadoTipoEvento.bind(this)}
-                                        >
-                                        <option>Selecione</option>
+                                    <select
+                                        id="consulta_medico"
+                                        value={this.state.idmedico}
+                                        onChange={this.atualizaEstadoIdMedico.bind(this)}
+                                    >
+                                        <option>Selecione o Médico</option>
                                         {
-                                            this.state.listaTiposEventos.map((element) => {
+                                            this.state.listamedicos.map((element) => {
                                                 return <option key={element.id} value={element.id}>{element.nome}</option>
                                             })
                                         }
-                                    </select> */}
+                                    </select>
                                     <textarea
                                         rows="3"
                                         cols="50"
@@ -201,7 +206,7 @@ class Consultas extends Component {
                                         id="consulta_observacoes"
                                     />
                                 </div>
-                                <button className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro">Cadastrar</button>
+                                <button type="submit" className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro">Cadastrar</button>
                             </form>
                         </div>
                     </section>

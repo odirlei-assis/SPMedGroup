@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Cabecalho from '../../components/Cabecalho/Cabecalho';
+import "./Login.css";
 
 export default class Login extends Component {
     constructor() {
@@ -38,7 +40,8 @@ export default class Login extends Component {
 
     render() {
         return (
-            <section className="container flex">
+            <section id="containerflex">
+                <Cabecalho/>
                 <div className="img__login">
                     <div className="img__overlay" />
                 </div>

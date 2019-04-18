@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './pages/Home/App';
 import Login from './pages/Login/Login';
 import NaoEncontrada from './pages/NaoEncontrada/NaoEncontrada';
 import Consultas from './pages/Consultas/Consultas'

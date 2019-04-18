@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+´
+.textarea{
+    resize: none;
+}
+
+.cabecalhoPrincipal{
+    height: 100px;
+    background: blueviolet;
+}
+
+.cabecalhoPrincipalCont{
+    display: flex;
+}
+
+.imgLogo{
+    flex: 1;
+}
+
+#imgLogo{
+    height: 110px;
+}
+
+.imgUser{
+    flex: 1;
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+}
+
+#imgUser{
+    height: 80px;
+    margin-right: 10px;
+}
+
+.cabecalhoNav{
+    flex: 3;
+}
