@@ -47,7 +47,7 @@ namespace Senai.SPMedGroup.WebApi.Repositories
         {
             using (SPMedGroupContext ctx = new SPMedGroupContext())
             {
-                return ctx.Consultas.ToList();
+                return ctx.Consultas.Include(x => x.IdMedicoNavigation).Include(y => y.IdSituacaoNavigation).ToList();
             }
         }
 
@@ -57,7 +57,7 @@ namespace Senai.SPMedGroup.WebApi.Repositories
             {
                 Medicos medicoP = ctx.Medicos.FirstOrDefault(x => x.IdUsuario == id);
 
-                return ctx.Consultas.Where(x => x.IdMedicoNavigation.Id == medicoP.Id).ToList();
+                return ctx.Consultas.Include(x => x.IdMedicoNavigation).Include(y => y.IdSituacaoNavigation).Where(x => x.IdMedicoNavigation.Id == medicoP.Id).ToList();
             }
         }
 
@@ -67,7 +67,7 @@ namespace Senai.SPMedGroup.WebApi.Repositories
             {
                 Prontuario prontuarioP = ctx.Prontuario.FirstOrDefault(x => x.IdUsuario == id);
 
-                return ctx.Consultas.Where(x => x.IdProntuarioNavigation.Id == prontuarioP.Id).ToList();
+                return ctx.Consultas.Include(x => x.IdMedicoNavigation).Include(y => y.IdSituacaoNavigation).Where(x => x.IdProntuarioNavigation.Id == prontuarioP.Id).ToList();
             }
         }
     }

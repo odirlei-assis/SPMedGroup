@@ -4,9 +4,43 @@
     box-sizing: border-box;
 }
 
-#containerflex{
+#containerflexlogin{
     background-image: url("../../assets/img/BackgroundLogin.png");
-    height: 100vw;
-    /* background-size: 100%; */
-    background-repeat: no-repeat;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+}
+
+#item__login{
+    width: 400px;
+    height: 465px;
+    background: #f2f8ff;
+    margin-left: 60%;
+    margin-top: 90px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #727272;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#item__login img{
+    height: 140px;
+    margin-top: 35px;
+}
+
+.input__login{
+    width: 325px;
+    padding-left: 10px;
+}
+
+.item1{
+    margin-top: 20px;
+    border-radius: 10px;
+    height: 45px;
+}
+
+.btn__login{
+    width: 140px;
+    margin-left: auto;
 }
