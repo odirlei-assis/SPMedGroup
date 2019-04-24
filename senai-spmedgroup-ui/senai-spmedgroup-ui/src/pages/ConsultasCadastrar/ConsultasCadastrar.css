@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#container{
+    background-image: url("../../assets/img/BackgroundListar.png");
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+}
+
+#lado_esquerdo{
+    width: 350px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+}
+
+#lado_esquerdo a{
+    margin-top: 30px;
+    font-size: 20px;
+    color: white;
+    margin-left: 20px;
+}
+
+.conteudoPrincipal_cadastro{
+    width: 100%;
+}
+
+.containerCadatrar{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.containerCadatrar *{
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+#consulta_observacoes{
+    resize: none;
+    height: 80px;
+}

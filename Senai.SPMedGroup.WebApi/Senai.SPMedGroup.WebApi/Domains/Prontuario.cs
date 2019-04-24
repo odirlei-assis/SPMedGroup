@@ -9,7 +9,7 @@ namespace Senai.SPMedGroup.WebApi.Domains
         {
             Consultas = new HashSet<Consultas>();
         }
-
+        // TODO criar um controller para trazer a lista de pacientes e busca por rg
         public int Id { get; set; }
         public string Nome { get; set; }
         public int IdUsuario { get; set; }

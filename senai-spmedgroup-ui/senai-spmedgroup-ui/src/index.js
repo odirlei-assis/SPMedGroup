@@ -4,10 +4,11 @@ import './index.css';
 import App from './pages/Home/App';
 import Login from './pages/Login/Login';
 import NaoEncontrada from './pages/NaoEncontrada/NaoEncontrada';
-import Consultas from './pages/Consultas/Consultas'
 import * as serviceWorker from './serviceWorker';
 import {Route, BrowserRouter as Router, Switch, Redirect} from 'react-router-dom';
 import { usuarioAutenticado } from './services/auth';
+import ConsultasCadastrar from './pages/ConsultasCadastrar/ConsultasCadastrar';
+import ConsultasListar from './pages/ConsultasListar/ConsultasListar';
 
 const Permissao = ({component : Component}) => (
     <Route
@@ -24,7 +25,8 @@ const rotas =(
             <Switch>
                 <Route exact path="/" component={App} />
                 <Route path="/login" component={Login}/>
-                <Permissao path="/consultas" component={Consultas}/>
+                <Permissao path="/consultascadastrar" component={ConsultasCadastrar}/>
+                <Permissao path="/consultaslistar" component={ConsultasListar}/>
                 <Route component={NaoEncontrada} />
             </Switch>
         </div>

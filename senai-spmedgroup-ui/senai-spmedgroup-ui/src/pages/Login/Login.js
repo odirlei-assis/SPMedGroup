@@ -32,7 +32,7 @@ export default class Login extends Component {
         })
             .then(data => {
                 localStorage.setItem("usuario-spmedgroup", data.data.token);
-                this.props.history.push('/consultas');
+                this.props.history.push('/consultaslistar');
                 console.log(data);
             })
             .catch(erro => {
@@ -49,11 +49,10 @@ export default class Login extends Component {
                 </div>
 
                 <div id="item__login">
-                    <div className="item"></div>
 
-                        <img id="imgLogo" src={imgLogo} />
+                    <img id="imgLogo" src={imgLogo} />
 
-                    <form onSubmit={this.efetuaLogin.bind(this)}>
+                    <form id="form_login" onSubmit={this.efetuaLogin.bind(this)}>
                         <div className="item">
                             <input
                                 className="input__login item1"
@@ -78,7 +77,7 @@ export default class Login extends Component {
                             />
                         </div>
 
-                        <button type="submit" className="btn btn__login item1" id="btn__login">Entrar</button>
+                        <button type="submit" className="btn__login item1" id="btn__login">Entrar</button>
                     </form>
                 </div>
             </section>
