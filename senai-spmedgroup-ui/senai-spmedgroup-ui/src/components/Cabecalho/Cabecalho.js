@@ -21,7 +21,7 @@ class Cabecalho extends Component {
                         <nav id="cabecalhoNav">
                             <Link to="/">Home</Link>
                             <Link to="">Unidades</Link>
-                            <Link to="/consultas">Consultas</Link>
+                            <Link to="/consultaslistar">Consultas</Link>
                         </nav>
                     </div>
                     <div className="imgUser">

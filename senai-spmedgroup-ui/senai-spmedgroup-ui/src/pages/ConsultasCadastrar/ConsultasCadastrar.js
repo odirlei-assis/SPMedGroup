@@ -15,6 +15,8 @@ class ConsultasCadastrar extends Component {
             idprontuario: null,
             idmedico: null,
             dataconsulta: "",
+            horaconsulta: "",
+            datahoraconsulta: "",
             idsituacao: null,
             observacoes: "",
             listamedicos: [],
@@ -38,6 +40,10 @@ class ConsultasCadastrar extends Component {
         this.setState({ dataconsulta: event.target.value });
     }
 
+    atualizaEstadoHora(event) {
+        this.setState({ horaconsulta: event.target.value });
+    }
+
     atualizaEstadoIdSituacao(event) {
         this.setState({ idsituacao: event.target.value });
     }
@@ -46,14 +52,19 @@ class ConsultasCadastrar extends Component {
         this.setState({ observacoes: event.target.value });
     }
 
+    atualizaEstadoDataHoraConsulta(){
+        this.setState({datahoraconsulta: this.state.dataconsulta + "T" + this.state.horaconsulta})
+    }
+
     cadastraConsulta(event) {
         event.preventDefault();
+
 
         let consulta = {
             id: this.state.id,
             idprontuario: this.state.idprontuario,
             idmedico: this.state.idmedico,
-            dataconsulta: this.state.dataconsulta,
+            dataconsulta: this.state.datahoraconsulta,
             idsituacao: 2,
             observacoes: this.state.observacoes
         };
@@ -68,7 +79,11 @@ class ConsultasCadastrar extends Component {
             }
         })
             .then(res => {
-                this.buscarConsultas()
+                if (res.status == 200) {
+                    alert("Suavao!")
+                    this.buscarConsultas()
+                }
+                alert("Deu ruim!")
             })
     }
 
@@ -109,13 +124,13 @@ class ConsultasCadastrar extends Component {
                                 <h2 className="conteudoPrincipal-cadastro-titulo">Cadastrar Consulta</h2>
                                 <form onSubmit={this.cadastraConsulta.bind(this)}>
                                     <div className="containerCadatrar">
-                                        <input
+                                        {/* <input
                                             type="text"
                                             value={this.state.idprontuario}
                                             onChange={this.atualizaEstadoIdProntuario.bind(this)}
                                             id="consulta_idProntuario"
                                             placeholder="Id do Prontuario"
-                                        />
+                                        /> */}
                                         <select
                                             id="consulta_idProntuario"
                                             value={this.state.idprontuario}
@@ -136,11 +151,18 @@ class ConsultasCadastrar extends Component {
                                         placeholder="Id do Médico"
                                     /> */}
                                         <input
-                                            type="dateTime"
+                                            type="date"
                                             value={this.state.dataconsulta}
                                             onChange={this.atualizaEstadoData.bind(this)}
                                             id="consulta_data"
                                             placeholder="Data Da Consulta"
+                                        />
+                                        <input
+                                            type="time"
+                                            value={this.state.horaconsulta}
+                                            onChange={this.atualizaEstadoHora.bind(this)}
+                                            id="consulta_hora"
+                                            placeholder="Hora Da Consulta"
                                         />
                                         {/* <select
                                         id="option__acessolivre"
@@ -171,7 +193,7 @@ class ConsultasCadastrar extends Component {
                                             id="consulta_observacoes"
                                         />
                                     </div>
-                                    <button type="submit" className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro">Cadastrar</button>
+                                    <button type="submit" className="conteudoPrincipal-btn-cadastro" onClick={        this.atualizaEstadoDataHoraConsulta.bind(this)}>Cadastrar</button>
                                 </form>
                             </div>
                         </section>
