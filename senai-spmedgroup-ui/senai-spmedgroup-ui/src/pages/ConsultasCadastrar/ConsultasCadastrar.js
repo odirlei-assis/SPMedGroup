@@ -193,7 +193,7 @@ class ConsultasCadastrar extends Component {
                                             id="consulta_observacoes"
                                         />
                                     </div>
-                                    <button type="submit" className="conteudoPrincipal-btn-cadastro" onClick={        this.atualizaEstadoDataHoraConsulta.bind(this)}>Cadastrar</button>
+                                    <button type="submit" className="conteudoPrincipal-btn-cadastro" onClick={this.atualizaEstadoDataHoraConsulta.bind(this)}>Cadastrar</button>
                                 </form>
                             </div>
                         </section>

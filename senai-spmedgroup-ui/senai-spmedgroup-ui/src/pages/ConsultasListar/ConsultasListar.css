@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#conteudoPrincipal_lista{
+    margin: 50px auto 0 auto;
+}
+
+#tabela_lista{
+    margin-top: 50px;
+}
+
+#tabela_lista tr{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+#w50{
+    width: 50px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+#w160{
+    width: 160px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+#w300{
+    width: 300px;
+    word-wrap: break-word;
+}

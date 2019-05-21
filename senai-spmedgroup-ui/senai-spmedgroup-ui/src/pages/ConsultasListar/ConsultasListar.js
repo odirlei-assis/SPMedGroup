@@ -62,21 +62,21 @@ class ConsultasListar extends Component {
                         <Link to="/consultascadastrar">Cadastrar Consulta</Link>
                         <Link to="/consultaslistar">Listar Consultas</Link>
                     </div>
-                    <div id="conteudoPrincipal-lista">
+                    <div id="conteudoPrincipal_lista">
                         <h1 className="conteudoPrincipal-cadastro-titulo">Lista de Consultas</h1>
 
-                        <table id="tabela-lista">
+                        <table id="tabela_lista">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
+                                    <th id="w50">Id</th>
                                     {/* <th>Id Prontuario</th> */}
-                                    <th>Nome Paciente</th>
+                                    <th id="w160">Nome Paciente</th>
                                     {/* <th>Id Médico</th> */}
-                                    <th>Nome Médico</th>
-                                    <th>Data da Consulta</th>
+                                    <th id="w160">Nome Médico</th>
+                                    <th id="w160">Data da Consulta</th>
                                     {/* <th>Id Situação da Consulta</th> */}
-                                    <th>Situação da Consulta</th>
-                                    <th>Observações</th>
+                                    <th id="w160">Situação da Consulta</th>
+                                    <th id="w300">Observações</th>
                                 </tr>
                             </thead>
 
@@ -84,16 +84,16 @@ class ConsultasListar extends Component {
                                 {
                                 this.state.listaconsultas.map(function (consultas) {
                                     return (
-                                        <tr key={consultas.id}>
-                                            <td>{consultas.id}</td>
+                                        <tr  key={consultas.id}>
+                                            <td id="w50">{consultas.id}</td>
                                             {/* <td>{consultas.idProntuario}</td> */}
-                                            <td>{consultas.idProntuarioNavigation.nome}</td>
+                                            <td id="w160">{consultas.idProntuarioNavigation.nome}</td>
                                             {/* <td>{consultas.idMedico}</td> */}
-                                            <td>{consultas.idMedicoNavigation.nome}</td>
-                                            <td>{consultas.dataConsulta}</td>
+                                            <td id="w160">{consultas.idMedicoNavigation.nome}</td>
+                                            <td id="w160">{consultas.dataConsulta}</td>
                                             {/* <td>{consultas.idSituacao}</td> */}
-                                            <td>{consultas.idSituacaoNavigation.nome}</td>
-                                            <td>{consultas.observacoes}</td>
+                                            <td id="w160">{consultas.idSituacaoNavigation.nome}</td>
+                                            <td id="w300">{consultas.observacoes}</td>
                                         </tr>
                                     );
                                 })

@@ -1,9 +1,9 @@
 ﻿{
   "iisSettings": {
     "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:55814",
+      "applicationUrl": "http://192.168.3.105:55814",
       "sslPort": 0
     }
   },
@@ -18,7 +18,7 @@
     "Senai.SPMedGroup.WebApi": {
       "commandName": "Project",
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:5000",
+      "applicationUrl": "http://192.168.3.105:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
