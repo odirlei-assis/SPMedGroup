@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TextInput, TouchableOpacity, View, Text, AsyncStorage, StyleSheet, Image } from "react-native";
+import { TextInput, TouchableOpacity, View, Text, ImageBackground, StyleSheet, Image } from "react-native";
 import api from "../services/api";
 import auth from "../services/auth";
 
@@ -25,58 +25,75 @@ class login extends Component {
 
     render() {
         return (
-            <View style={styles.conteudo}>
-                <View style={styles.viewLogo}>
-                    <Image source={require("../assets/img/Logo.png")} style={styles.logo} />
+            <ImageBackground 
+                source={require("../assets/img/background.jpg")}
+                style={{ width: '100%', height: '100%' }} blurRadius={8}>
+                    
+                <View style={styles.conteudo}>
+                    <View style={styles.viewLogo}>
+                        <Image source={require("../assets/img/Logo.png")} style={styles.logo}/>
+                    </View>
+
+                    <TextInput style={styles.inputs} onChangeText={email => this.setState({ email })} placeholder="Email" defaultValue="A@A.A"></TextInput>
+
+                    <TextInput style={styles.inputs} onChangeText={senha => this.setState({ senha })} placeholder="Senha" defaultValue="123" secureTextEntry={true}></TextInput>
+
+                    <TouchableOpacity style={styles.btnLogar} onPress={this.logar}><Text style={styles.btnLogarText}>Logar</Text></TouchableOpacity>
+
+                    {console.warn(auth.getItem().then(res => res))}
                 </View>
-                <TextInput style={styles.inputs} onChangeText={email => this.setState({ email })} placeholder="Email" defaultValue="A@A.A"></TextInput>
-                <TextInput style={styles.inputs} onChangeText={senha => this.setState({ senha })} placeholder="Senha" defaultValue="123" secureTextEntry={true}></TextInput>
-                <TouchableOpacity style={styles.btnLogar} onPress={this.logar}><Text style={styles.btnLogarText}>Logar</Text></TouchableOpacity>
-                {console.warn(auth.getItem().then(res => res))}
-            </View>
+            </ImageBackground>
         );
     }
 }
 
 const styles = StyleSheet.create({
     conteudo: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: "rgba(0, 0, 0, 0.25)",
         alignItems: "center",
         height: "100%",
-        width: "100%"
+        width: "100%",
     },
 
     viewLogo: {
         width: "100%",
         alignItems: "center",
-        // backgroundColor: "pink",
+        elevation: 2,
     },
 
     logo: {
         marginTop: 100,
-        marginBottom: 10,
-        width: 300,
-        height: 160,
+        marginBottom: 5,
+        width: 320,
+        height: 180,
     },
 
     inputs: {
-        width: 200,
+        width: 250,
         height: 40,
-        backgroundColor: "green",
-        margin: 15,
+        backgroundColor: "#CCFFFF",
+        margin: 20,
         justifyContent: "center",
         fontSize: 18,
         paddingLeft: 10,
-        borderRadius: 10,
+        borderRadius: 20,
+        elevation: 5,
+        borderWidth: 1,
+        borderColor: "green"
     },
 
     btnLogar: {
-        width: 200,
+        width: 150,
         height: 40,
-        marginTop: 15,
+        marginTop: 20,
         alignItems: "center",
-        backgroundColor: "cyan",
+        backgroundColor: "#82C0D9",
         justifyContent: "center",
-        borderRadius: 10,
+        borderRadius: 20,
+        elevation: 5,
+        borderWidth: 1,
+        borderColor: "green"
     },
     
     btnLogarText: {
