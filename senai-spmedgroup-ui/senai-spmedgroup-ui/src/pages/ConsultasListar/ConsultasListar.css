@@ -4,18 +4,38 @@
     box-sizing: border-box;
 }
 
+
 #conteudoPrincipal_lista{
     margin: 50px auto 0 auto;
+}
+
+#conteudoPrincipal_lista h1{
+    font-size: 40px;
+    margin-left: 40%;
 }
 
 #tabela_lista{
     margin-top: 50px;
 }
 
+#overflow{
+    overflow-y: scroll;
+    height: 550px;
+    margin-top: 10px;
+}
+
 #tabela_lista tr{
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    align-items: center;
+    padding: 5px;
+}
+
+#tabela_cabecalho {
+    font-size: 18px;
 }
 
 #w50{
@@ -24,8 +44,8 @@
     margin-right: 5px;
 }
 
-#w160{
-    width: 160px;
+#w180{
+    width: 180px;
     text-align: center;
     margin-right: 5px;
 }

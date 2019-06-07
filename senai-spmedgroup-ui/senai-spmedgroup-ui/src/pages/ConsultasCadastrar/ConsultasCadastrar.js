@@ -52,8 +52,8 @@ class ConsultasCadastrar extends Component {
         this.setState({ observacoes: event.target.value });
     }
 
-    atualizaEstadoDataHoraConsulta(){
-        this.setState({datahoraconsulta: this.state.dataconsulta + "T" + this.state.horaconsulta})
+    atualizaEstadoDataHoraConsulta() {
+        this.setState({ datahoraconsulta: this.state.dataconsulta + "T" + this.state.horaconsulta })
     }
 
     cadastraConsulta(event) {
@@ -72,7 +72,7 @@ class ConsultasCadastrar extends Component {
         console.log("Consulta:");
         console.log(consulta);
 
-        axios.post('http://localhost:5000/api/consultas', consulta, {
+        axios.post('http://192.168.3.105:5000/api/consultas', consulta, {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("usuario-spmedgroup"),
                 "Content-Type": "application/json"
@@ -80,29 +80,29 @@ class ConsultasCadastrar extends Component {
         })
             .then(res => {
                 if (res.status == 200) {
-                    alert("Suavao!")
+                    alert("Cadastrada!")
                     this.buscarConsultas()
                 }
-                alert("Deu ruim!")
+                alert("Problema ao cadastrar!")
             })
     }
 
     componentDidMount() {
         apiService
-        .call("medicos")
-        .getAll()
-        .then(data => {
-            console.log(data.data);
-            this.setState({ listamedicos: data.data });
-        });
-        
+            .call("medicos")
+            .getAll()
+            .then(data => {
+                console.log(data.data);
+                this.setState({ listamedicos: data.data });
+            });
+
         apiService
-        .call("prontuarios")
-        .getAll()
-        .then(data => {
-            console.log(data.data);
-            this.setState({ listaProntuario: data.data });
-        });
+            .call("prontuarios")
+            .getAll()
+            .then(data => {
+                console.log(data.data);
+                this.setState({ listaProntuario: data.data });
+            });
 
     }
 
@@ -117,54 +117,54 @@ class ConsultasCadastrar extends Component {
                     </div>
 
                     <main className="conteudoPrincipal">
-                        <section className="conteudoPrincipal-cadastro">
-
-
-                            <div id="conteudoPrincipal_cadastro">
-                                <h2 className="conteudoPrincipal-cadastro-titulo">Cadastrar Consulta</h2>
-                                <form onSubmit={this.cadastraConsulta.bind(this)}>
-                                    <div className="containerCadatrar">
-                                        {/* <input
+                        <div id="conteudoPrincipal_cadastro">
+                            <h1>Cadastrar Consulta</h1>
+                            <form onSubmit={this.cadastraConsulta.bind(this)}>
+                                <div className="containerCadatrar">
+                                    {/* <input
                                             type="text"
                                             value={this.state.idprontuario}
                                             onChange={this.atualizaEstadoIdProntuario.bind(this)}
                                             id="consulta_idProntuario"
                                             placeholder="Id do Prontuario"
                                         /> */}
-                                        <select
-                                            id="consulta_idProntuario"
-                                            value={this.state.idprontuario}
-                                            onChange={this.atualizaEstadoIdProntuario.bind(this)}
-                                        >
-                                            <option>Selecione o Paciente</option>
-                                            {
-                                                this.state.listaProntuario.map((element) => {
-                                                    return <option key={element.id} value={element.id}>{element.rg}</option>
-                                                })
-                                            }
-                                        </select>
-                                        {/* <input
+                                    <select
+                                        id="consulta_idProntuario"
+                                        className= "containerItem"
+                                        value={this.state.idprontuario}
+                                        onChange={this.atualizaEstadoIdProntuario.bind(this)}
+                                    >
+                                        <option>Selecione o Paciente</option>
+                                        {
+                                            this.state.listaProntuario.map((element) => {
+                                                return <option key={element.id} value={element.id}>{element.rg}</option>
+                                            })
+                                        }
+                                    </select>
+                                    {/* <input
                                         type="text"
                                         value={this.state.idmedico}
                                         onChange={this.atualizaEstadoIdMedico.bind(this)}
                                         id="consulta_idMedico"
                                         placeholder="Id do Médico"
                                     /> */}
-                                        <input
-                                            type="date"
-                                            value={this.state.dataconsulta}
-                                            onChange={this.atualizaEstadoData.bind(this)}
-                                            id="consulta_data"
-                                            placeholder="Data Da Consulta"
-                                        />
-                                        <input
-                                            type="time"
-                                            value={this.state.horaconsulta}
-                                            onChange={this.atualizaEstadoHora.bind(this)}
-                                            id="consulta_hora"
-                                            placeholder="Hora Da Consulta"
-                                        />
-                                        {/* <select
+                                    <input
+                                        type="date"
+                                        value={this.state.dataconsulta}
+                                        onChange={this.atualizaEstadoData.bind(this)}
+                                        id="consulta_data"
+                                        className= "containerItem"
+                                        placeholder="Data Da Consulta"
+                                    />
+                                    <input
+                                        type="time"
+                                        value={this.state.horaconsulta}
+                                        onChange={this.atualizaEstadoHora.bind(this)}
+                                        id="consulta_hora"
+                                        className= "containerItem"
+                                        placeholder="Hora Da Consulta"
+                                    />
+                                    {/* <select
                                         id="option__acessolivre"
                                         value={this.state.acessoLivre}
                                         onChange={this.atualizaEstadoAcessoLivre.bind(this)}
@@ -172,31 +172,31 @@ class ConsultasCadastrar extends Component {
                                         <option value="1">Livre</option>
                                         <option value="0">Restrito</option>
                                     </select> */}
-                                        <select
-                                            id="consulta_medico"
-                                            value={this.state.idmedico}
-                                            onChange={this.atualizaEstadoIdMedico.bind(this)}
-                                        >
-                                            <option>Selecione o Médico</option>
-                                            {
-                                                this.state.listamedicos.map((element) => {
-                                                    return <option key={element.id} value={element.id}>{element.nome}</option>
-                                                })
-                                            }
-                                        </select>
-                                        <textarea
-                                            rows="3"
-                                            cols="50"
-                                            value={this.state.observacoes}
-                                            onChange={this.atualizaEstadoObservacoes.bind(this)}
-                                            placeholder="Observações"
-                                            id="consulta_observacoes"
-                                        />
-                                    </div>
-                                    <button type="submit" className="conteudoPrincipal-btn-cadastro" onClick={this.atualizaEstadoDataHoraConsulta.bind(this)}>Cadastrar</button>
-                                </form>
-                            </div>
-                        </section>
+                                    <select
+                                        id="consulta_medico"
+                                        className= "containerItem"
+                                        value={this.state.idmedico}
+                                        onChange={this.atualizaEstadoIdMedico.bind(this)}
+                                    >
+                                        <option>Selecione o Médico</option>
+                                        {
+                                            this.state.listamedicos.map((element) => {
+                                                return <option key={element.id} value={element.id}>{element.nome}</option>
+                                            })
+                                        }
+                                    </select>
+                                    <textarea
+                                        rows="3"
+                                        cols="50"
+                                        value={this.state.observacoes}
+                                        onChange={this.atualizaEstadoObservacoes.bind(this)}
+                                        placeholder="Observações"
+                                        id="consulta_observacoes"
+                                    />
+                                </div>
+                                <button type="submit" id="btn_cadastro" onClick={this.atualizaEstadoDataHoraConsulta.bind(this)}>Cadastrar</button>
+                            </form>
+                        </div>
                     </main>
 
                     {/* <Rodape /> */}

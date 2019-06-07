@@ -34,9 +34,9 @@ class login extends Component {
                         <Image source={require("../assets/img/Logo.png")} style={styles.logo}/>
                     </View>
 
-                    <TextInput style={styles.inputs} onChangeText={email => this.setState({ email })} placeholder="Email" defaultValue="A@A.A"></TextInput>
+                    <TextInput style={styles.inputs} onChangeText={email => this.setState({ email })} placeholder="Email" placeholderTextColor= "#1A1A1A"></TextInput>
 
-                    <TextInput style={styles.inputs} onChangeText={senha => this.setState({ senha })} placeholder="Senha" defaultValue="123" secureTextEntry={true}></TextInput>
+                    <TextInput style={styles.inputs} onChangeText={senha => this.setState({ senha })} placeholder="Senha" placeholderTextColor= "#1A1A1A" secureTextEntry={true}></TextInput>
 
                     <TouchableOpacity style={styles.btnLogar} onPress={this.logar}><Text style={styles.btnLogarText}>Logar</Text></TouchableOpacity>
 
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 
     logo: {
         marginTop: 100,
-        marginBottom: 5,
+        marginBottom: 10,
         width: 320,
         height: 180,
     },
@@ -74,13 +74,12 @@ const styles = StyleSheet.create({
         height: 40,
         backgroundColor: "#CCFFFF",
         margin: 20,
-        justifyContent: "center",
         fontSize: 18,
         paddingLeft: 10,
         borderRadius: 20,
-        elevation: 5,
+        // elevation: 5,
         borderWidth: 1,
-        borderColor: "green"
+        borderColor: "#82D98F",
     },
 
     btnLogar: {
@@ -93,12 +92,13 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         elevation: 5,
         borderWidth: 1,
-        borderColor: "green"
+        borderColor: "#82D98F"
     },
     
     btnLogarText: {
         fontSize: 20,
-        fontWeight: "600" 
+        fontWeight: "600",
+        color: "#1A1A1A",
     }
 
 });

@@ -6,44 +6,72 @@
 
 #container{
     background-image: url("../../assets/img/BackgroundListar.png");
-    height: 100vh;
+    /* height: 100vh; */
     background-position: center;
     background-size: cover;
-    background-repeat: repeat-y;
+    /* background-repeat: repeat-y; */
     display: flex;
 }
 
 #lado_esquerdo{
     width: 350px;
-    height: 100vh;
+    height: 88vh;
     display: flex;
     flex-direction: column;
-    padding-top: 50px;
+    padding-top: 80px;
 }
 
 #lado_esquerdo a{
     margin-top: 30px;
-    font-size: 20px;
+    font-size: 25px;
     color: white;
     margin-left: 20px;
+    font-weight: 600;
 }
 
-.conteudoPrincipal_cadastro{
-    width: 100%;
+.conteudoPrincipal{
+    margin: 50px auto 0 auto;
+}
+
+.conteudoPrincipal h1{
+    font-size: 40px;
+}
+
+#conteudoPrincipal_cadastro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .containerCadatrar{
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-top: 30px;
 }
 
 .containerCadatrar *{
-    margin-top: 20px;
+    margin-top: 30px;
     font-size: 18px;
+}
+
+.containerItem{
+    height: 35px;
+    width: 700px;
+    border-radius: 10px;
 }
 
 #consulta_observacoes{
     resize: none;
-    height: 80px;
+    height: 140px;
+    border-radius: 10px;
+}
+
+#btn_cadastro{
+    margin-top: 30px;
+    height: 35px;
+    width: 120px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 600;
 }
