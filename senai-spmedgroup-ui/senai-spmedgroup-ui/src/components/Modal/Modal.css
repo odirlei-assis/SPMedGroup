@@ -1,0 +1,138 @@
+#backdropStyle{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.4);
+    padding: 300px;
+}
+
+.modalStyle{
+    background-color: #FFF;
+    border-radius: 5px;
+    max-width: 600px;
+    min-height: 300px;
+    margin: 0 auto;
+    padding: 30px;
+    position: relative;
+}
+
+#footerStyle{
+    position: absolute;
+    bottom: 20px;
+}
+
+#headerStyle{
+    color:#000;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#label{
+    color: "#000";
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+#mainStyle{
+
+}
+
+#input__header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+#input__header__one{
+    display: flex;
+    flex-direction: column;
+}
+
+#input__middle__one{
+    display: flex;
+    flex-direction: column;
+}
+
+#select__header__espec{
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border-width: 1px;
+    outline: none;
+}
+
+#select__header__genero{
+    height: 30px;
+    border-radius: 5px;
+    border-width: 1px;
+    outline: none;
+    width: 180px;
+}
+
+#input__middle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+#input__end{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 60px;
+}
+
+#input__end__one{
+    display: flex;
+    flex-direction: column;
+}
+
+#input__middle__idade{
+    width: 180px;
+    height: 28px;
+    padding-left: 5px;
+    border-radius: 5px;
+    border-width: 1px;
+}
+
+#input__middle__data{
+    width: 150px;
+    height: 28px;
+    padding-left: 5px;
+    border-radius: 5px;
+    border-width: 1px;
+}
+
+#input__end__local{
+    width: 180px;
+    height: 28px;
+    padding-left: 5px;
+    border-radius: 5px;
+    border-width: 1px;
+}
+
+#footerStyle__btn__one{
+    padding: 8px;
+    border-radius: 5px;
+    border-width: 1px;
+    background-color: #38B478;
+    color: #FFF;
+    cursor: pointer;
+    margin-right: 15px;
+    width: 130px;
+}
+
+#footerStyle__btn__two{
+    padding: 8px;
+    border-radius: 5px;
+    border-width: 1px;
+    background-color: #7ABFCF;
+    color: #FFF;
+    cursor: pointer;
+    width: 80px;
+}

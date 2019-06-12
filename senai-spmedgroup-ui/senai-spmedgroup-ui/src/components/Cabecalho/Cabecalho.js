@@ -19,8 +19,8 @@ class Cabecalho extends Component {
                     </div>
                     <div className="cabecalhoNav">
                         <nav id="cabecalhoNav">
-                            <Link to="/">Home</Link>
-                            <Link to="">Unidades</Link>
+                            {/* <Link to="/">Home</Link> */}
+                            {/* <Link to="">Unidades</Link> */}
                             <Link to="/consultaslistar">Consultas</Link>
                         </nav>
                     </div>

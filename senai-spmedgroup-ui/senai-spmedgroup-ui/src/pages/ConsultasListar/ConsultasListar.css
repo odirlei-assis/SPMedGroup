@@ -38,8 +38,18 @@
     font-size: 18px;
 }
 
+#tabela_cabecalho tr{
+    height: 40px;
+}
+
 #w50{
     width: 50px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+#w140{
+    width: 140px;
     text-align: center;
     margin-right: 5px;
 }
@@ -50,7 +60,38 @@
     margin-right: 5px;
 }
 
-#w300{
-    width: 300px;
+#w270{
+    width: 270px;
     word-wrap: break-word;
+}
+
+#w320{
+    width: 320px;
+}
+
+.red{
+    color: red;
+}
+
+.green{
+    color: green;
+}
+
+.orange{
+    color: orange;
+}
+
+.btn__mais{
+    background: none;
+    border: none;
+    margin-right: 5px;
+}
+
+#btn__mais :hover{
+    transform: rotate3d(1, 0, 0, 35deg)
+}
+
+#imgMais{
+    height: 30px;
+    width: 30px;
 }

@@ -56,8 +56,15 @@
    color: whitesmoke;
    font-size: 25px;
    font-weight: 600;
+   text-decoration-line: none;
 }
 
 #cabecalhoNav a:hover{
-    color: lightgreen;
+    color: #B3FFE3;
+    font-weight: 700;
+}
+
+#imgMais{
+    height: 20px;
+    width: 20px;
 }

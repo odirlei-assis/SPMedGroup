@@ -63,8 +63,6 @@ namespace Senai.SPMedGroup.WebApi.Controllers
                 {
                     return Ok(ConsultaRepository.ListarConsultasPaciente(id));
                 }
-
-                //return Ok(ConsultaRepository.ListarConsultas());
             }
             catch (Exception ex)
             {
